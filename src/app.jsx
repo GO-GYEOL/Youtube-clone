@@ -1,31 +1,24 @@
 import { useEffect, useState } from "react";
-import "./app.css";
+import SearchHeader from "./components/search_header/search_header";
 import VideoList from "./components/video_list/video_list";
+import styles from "./app.module.css";
 
-function App() {
+function App({ youtube }) {
   const [videos, setVideos] = useState([]);
-
+  const search = (query) => {
+    youtube
+      .search(query) //
+      .then((videos) => setVideos(videos));
+  };
   useEffect(() => {
-    const requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    fetch(
-      "https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&regionCode=kr&key=AIzaSyCh_dw4ZL7OlTOwl063UZFk02eqTuNNkUY",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => setVideos(result.items))
-      // 오우 이렇게 fetch로 쓰는구나.... 왜 이생각을 못했지...
-      .catch((error) => console.log("error", error));
+    youtube.mostPopular().then((videos => setVideos(videos)));
   }, []);
 
   return (
-    <>
-      <div>
-        <VideoList videos={videos} />
-      </div>
-    </>
+    <div className={styles.app}>
+      <SearchHeader onSearch={search} />
+      <VideoList videos={videos} />
+    </div>
   );
 }
 export default App;
