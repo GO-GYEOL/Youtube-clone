@@ -3,6 +3,7 @@
     padding:0.2em;
 }
 .container.grid{
+    /* container이면서 grid면 */
     width:50%;
 }
 .container.list{

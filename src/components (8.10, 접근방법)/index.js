@@ -9,5 +9,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App youtube={youtube} />
+    {/* App에 전달을 해줬다. */}
   </React.StrictMode>
 );

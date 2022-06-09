@@ -1,9 +1,8 @@
 import styles from "./search_header.module.css";
 
-import React, { memo, useRef } from "react";
+import React, { useRef } from "react";
 
-// memo 컴포넌트로 변경시켰다. Header는 props 전달받지 않는 한 바뀔 이유가 전혀없기때문.
-const SearchHeader = memo(({onSearch}) => {
+const SearchHeader = ({onSearch}) => {
   const inputRef = useRef();
   const handleSearch = () => {
       const value=inputRef.current.value;
@@ -39,6 +38,6 @@ const SearchHeader = memo(({onSearch}) => {
       </button>
     </header>
   );
-})
+};
 
 export default SearchHeader;
